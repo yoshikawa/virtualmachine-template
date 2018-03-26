@@ -6,11 +6,13 @@
 
 rbenv_system_install 'foo' do
     git_url "https://github.com/rbenv/rbenv.git"
-end
+end 
 
 rbenv_ruby '2.5.0'
 
 rbenv_global '2.5.0'
+
+rbenv_local '2.5.0'
 
 rbenv_gem 'unicorn' do
     rbenv_version '2.5.0'
@@ -21,13 +23,5 @@ rbenv_gem 'postgresql' do
 end
 
 rbenv_gem 'rails' do
-    rbenv_version '2.5.0'
-end
-
-yum_package 'sqlite-devel' do
-    action :install
-end
-
-rbenv_gem 'sqlite3' do
     rbenv_version '2.5.0'
 end
