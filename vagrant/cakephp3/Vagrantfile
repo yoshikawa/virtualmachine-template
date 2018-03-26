@@ -1,0 +1,32 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.synced_folder ".", "/vagrant", disabled: false
+
+  config.vm.define :default do |default|
+    DefineMachineEnvironment default, "default", "1024"
+    default.vm.hostname = "default-hostname"
+    default.vm.box = "centos/7"
+    default.vm.network :private_network, ip: "192.168.33.11"
+    default.vm.network :forwarded_port, guest: "80", host: "8095"
+    default.vm.provision :shell, :path => "cakephp.sh"
+  end
+
+  config.vm.define :develop do |develop|
+    DefineMachineEnvironment develop, "test", "1024"
+    develop.vm.hostname = "develop-hostname"
+    develop.vm.box = "centos/7"
+    develop.vm.network :private_network, ip: "192.168.33.12"
+    develop.vm.network :forwarded_port, guest: "80", host: "8096"
+    develop.vm.provision :shell, :path => "cakephp.sh"
+  end
+
+  ## Define macros
+  def DefineMachineEnvironment(tmp, virtualbox_name, use_memory)
+    tmp.vm.provider "virtualbox" do |vbox|
+      vbox.name   = virtualbox_name
+      vbox.memory = use_memory
+    end
+  end
+end

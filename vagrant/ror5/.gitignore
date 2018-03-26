@@ -1,0 +1,7 @@
+.vagrant
+environments
+nodes
+roles
+
+Berksfile.lock
+Gemfile.lock

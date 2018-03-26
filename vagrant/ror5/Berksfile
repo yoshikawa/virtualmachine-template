@@ -1,0 +1,13 @@
+source "https://api.berkshelf.com"
+
+cookbook 'git'
+cookbook 'build-essential'
+cookbook 'yum'
+cookbook 'vim'
+cookbook 'openssl'
+cookbook 'nginx'
+cookbook 'ruby_build'
+cookbook 'postgresql'
+cookbook 'nodejs'
+cookbook 'selinux'
+cookbook 'ruby_2-5-0', path: './site-cookbooks/ruby_2-5-0'

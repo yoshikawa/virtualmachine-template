@@ -1,0 +1,60 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.synced_folder ".", "/vagrant", disabled: false
+  #
+  if Vagrant.has_plugin?("vagrant-vbguest")
+    config.vbguest.auto_update = true
+  end
+  # cache package
+  if Vagrant.has_plugin?("vagrant-cachier")
+    config.cache.scope = :box
+  end
+
+  config.vm.define :develop do |develop|
+    DefineMachineEnvironment develop, "rails", "1024"
+    # install and update chef_version latest
+    develop.omnibus.chef_version = :latest
+    develop.vm.hostname = "rails-local"
+    develop.vm.box = "centos/7"
+    develop.vm.network :private_network, ip: "192.168.86.12"
+    develop.vm.network :forwarded_port, guest: "3000", host: "3000"
+
+    develop.vm.provision :chef_solo do |chef|
+      #chef.log_level = "info"
+      chef.cookbooks_path = "./cookbooks"
+      chef.add_recipe 'yum'
+      chef.add_recipe 'postgresql'
+      chef.add_recipe 'git'
+      chef.add_recipe 'vim'
+      chef.add_recipe 'nginx'
+      chef.add_recipe 'nodejs'
+      chef.add_recipe "selinux::disabled"
+      chef.add_recipe 'build-essential'
+      chef.add_recipe 'ruby_build'
+      chef.add_recipe "ruby_2-5-0"
+      
+
+      chef.json = {
+        "ruby_rbenv" => {
+          "global" => "2.5.0",
+          "rubies" => "2.5.0",
+          "gems" => {
+            "2.5.0" => [
+              { 'name' => 'bundler' }
+            ]
+          }
+        }
+      }
+    end
+  end
+
+  ## Define macros
+  def DefineMachineEnvironment(tmp, virtualbox_name, use_memory)
+    tmp.vm.provider "virtualbox" do |vbox|
+      vbox.name   = virtualbox_name
+      vbox.memory = use_memory
+    end
+  end
+end
