@@ -1,0 +1,33 @@
+language: ruby
+cache: bundler
+sudo: false
+rvm:
+- 2.4.3
+bundler_args: "--without kitchen_vagrant"
+before_install:
+- openssl aes-256-cbc -K $encrypted_f58e3a74976a_key -iv $encrypted_f58e3a74976a_iv
+  -in .travis/secrets.tar.gz.enc -out .travis/secrets.tar.gz -d
+- tar xzf .travis/secrets.tar.gz -C .travis
+- mv .travis/id_rsa ~/.ssh/id_rsa
+script:
+- bundle exec rubocop
+- bundle exec foodcritic -f any .
+- bundle exec rspec
+- eval "$(ssh-agent -s)"
+- ssh-add ~/.ssh/id_rsa
+- bundle exec kitchen test -c 10 -d always
+# deploy:
+#   edge:
+#     branch: ruby-2.3
+#   provider: chef-supermarket
+#   user_id: dr_agon
+#   client_key: ".travis/dr_agon.pem"
+#   cookbook_category: Other
+#   skip_cleanup: true
+#   on:
+#     tags: true
+env:
+  global:
+  - KITCHEN_YAML=.kitchen.cloud.yml
+  - DIGITALOCEAN_SSH_KEY_IDS=03:c8:3f:fb:ed:7a:64:2b:b7:9a:13:f6:3d:3f:58:63
+  - secure: nfBbV/a0PTzT1tbKjIW3LP2bVuSVvwym+Yku2B/LZVDmzefvyVto2HXSagLvsBK0M3oBkgHzMcoymLyIFUQGR6UznKyKA7EHuMSd9QJ6QzlNZH8RK7ByjWWt1siXAFMiBpLg1jObzScpYdla40zfemOFiLcFfkkVBTrgiF8T5Ec=

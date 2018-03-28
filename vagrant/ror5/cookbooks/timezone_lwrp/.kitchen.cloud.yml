@@ -1,0 +1,28 @@
+---
+driver:
+  name: digitalocean
+
+driver_config:
+  private_networking: false
+  region: nyc3
+
+provisioner:
+  name: chef_zero
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: ubuntu-14-04-x64
+  - name: ubuntu-16-04-x64
+  - name: debian-8-x64
+  - name: debian-9-x64
+  - name: centos-6-x64
+  - name: centos-7-x64
+  - name: fedora-26-x64
+  - name: fedora-27-x64
+
+suites:
+  - name: default
+    run_list:
+      - recipe[timezone_test]

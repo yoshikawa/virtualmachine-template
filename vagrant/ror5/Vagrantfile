@@ -34,18 +34,22 @@ Vagrant.configure("2") do |config|
       chef.add_recipe 'build-essential'
       chef.add_recipe 'ruby_build'
       chef.add_recipe "ruby_2-5-0"
+      chef.add_recipe "timezone_lwrp"
       
-
       chef.json = {
-        "ruby_rbenv" => {
-          "global" => "2.5.0",
-          "rubies" => "2.5.0",
-          "gems" => {
-            "2.5.0" => [
-              { 'name' => 'bundler' }
-            ]
-          }
-        }
+        rbenv: {
+          user_installs: [{
+            user: 'vagrant',
+            rubies: ["2.5.0"],
+            global: "2.5.0",
+            gems: {
+              "2.5.0" => [
+                { name: "bundler" }
+              ]
+            }
+          }]
+        },
+        tz: "Asia/Tokyo"
       }
     end
   end

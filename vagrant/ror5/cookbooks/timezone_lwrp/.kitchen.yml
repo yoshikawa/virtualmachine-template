@@ -1,0 +1,25 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_zero
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: bento/ubuntu-14.04
+  - name: bento/ubuntu-16.04
+  - name: bento/debian-8
+  - name: bento/debian-9
+  - name: bento/centos-6
+  - name: bento/centos-7
+  - name: bento/fedora-26
+  - name: bento/fedora-27
+
+
+suites:
+  - name: default
+    run_list:
+      - recipe[timezone_test]

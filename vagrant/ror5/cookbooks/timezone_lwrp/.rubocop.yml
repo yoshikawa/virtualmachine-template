@@ -1,0 +1,24 @@
+Style/AndOr:
+  Enabled: false
+SpaceBeforeFirstArg:
+  Enabled: false
+UnusedBlockArgument:
+  Enabled: false
+LineLength:
+  Enabled: false
+AndOr:
+  Enabled: false
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: consistent_comma
+Style/TrailingCommaInLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+Metrics/BlockLength:
+  Enabled: false
+Naming/AccessorMethodName:
+  Exclude:
+    - libraries/matchers.rb
+
+AllCops:
+  Exclude:
+    - '.kitchen/**/*'
+    - 'vendor/**/*'
