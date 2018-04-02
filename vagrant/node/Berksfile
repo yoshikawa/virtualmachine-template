@@ -1,1 +1,10 @@
 source "https://api.berkshelf.com"
+
+cookbook 'git'
+cookbook 'build-essential'
+cookbook 'yum'
+cookbook 'vim'
+cookbook 'openssl'
+cookbook 'nginx'
+cookbook 'nodejs'
+cookbook 'selinux'
