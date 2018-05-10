@@ -1,0 +1,20 @@
+version: '3'
+services:
+  nginx:
+    build:
+      context: ./nginx
+    image: modern_nginx
+    container_name: modern_nginx_container
+    ports:
+      - "80:8080"
+    volumes:
+      - ./app/dist:/wwwroot:ro
+  webpack:
+    build:
+      context: ./webpack
+    image: modern_webpack
+    container_name: modern_webpack_container
+    volumes:
+      - ./app/src:/app/src:ro
+      - ./app/dist:/app/dist:z
+    command: [npm, start]
