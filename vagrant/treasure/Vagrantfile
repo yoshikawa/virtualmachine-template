@@ -1,0 +1,34 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+    config.vm.synced_folder ".", "/vagrant", disabled: false
+    #
+    if Vagrant.has_plugin?("vagrant-vbguest")
+      config.vbguest.auto_update = true
+    end
+    # cache package
+    if Vagrant.has_plugin?("vagrant-cachier")
+      config.cache.scope = :box
+    end
+  
+    config.vm.define :default do |default|
+      DefineMachineEnvironment default, "treasure", "1024"
+      # install and update chef_version latest
+      default.omnibus.chef_version = :latest
+      default.vm.hostname = "treasure-local"
+      default.vm.box = "centos/7"
+      default.vm.network :private_network, ip: "192.168.86.12"
+      default.vm.network :forwarded_port, guest: "80", host: "8099"
+      default.vm.provision :shell, :path => "treasure.sh"
+    end
+  
+    ## Define macros
+    def DefineMachineEnvironment(tmp, virtualbox_name, use_memory)
+      tmp.vm.provider "virtualbox" do |vbox|
+        vbox.name   = virtualbox_name
+        vbox.memory = use_memory
+        vbox.gui = true
+      end
+    end
+  end
