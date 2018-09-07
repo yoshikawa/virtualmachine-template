@@ -1,8 +1,5 @@
 version: '2'
 services:
-  memcached:
-    image: memcached:latest
-
   data-cakephp:
     image: busybox
     volumes:
