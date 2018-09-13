@@ -27,9 +27,9 @@ services:
     image: postgres:latest
     restart: always
     environment:
-      - POSTGRES_DB=${DB_NAME}
-      - POSTGRES_USER=${DB_USER}
-      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=my_app
+      - POSTGRES_USER=pguser
+      - POSTGRES_PASSWORD=password
     ports:
       - 5432:5432
     volumes:
