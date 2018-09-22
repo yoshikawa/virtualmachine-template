@@ -1,36 +1,62 @@
-# php7
+# CakePHP
 
-php7 & nginx & mysql with docker
+CakePHP3をdockerで環境構築
 
-## Description
+## Description(概要)
 
-Create an environment to develop PHP7 using Docker
+CakePHP3をdockerで環境構築します。
 
-## Requirement
+## Requirement(必要条件)
 
 - [Docker](https://www.docker.com/)
 
-## Usage
-
-if you use Macintosh
 1. `brew cask install docker`
-2. set up docker
+2. dockerを起動します
+3. `docker ps`でdockerのプロセスを確認することができます。
 
-## Install
+if you use Linux
+ 
+- mysql-client
+ 
+ex. `sudo apt install mysql-client`
 
-- Make sure you've installed Requirements.
-- Open terminal, `cd` to working directory and clone the project `git clone git://github.com/YoshikawaTaiki/vagrant-template.git`
-- Open terminal, `cd` to `vagrant-template/docker/php7/docker`
-- Place application source code into public folder
 
-## Contribution
+## Usage(使い方)
 
-1. Fork it ( https://github.com/Yoshikawataiki/vagrant-template/fork)
-2. Create your feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create new Pull Request
+1. `make docker/start`
+2. `make composer/install`
+3. `make migrate/init` *password* と入力
+4. [http://localhost/](http://localhost/)　にアクセスする
 
-## Author
+### Makefile
+
+このリポジトリはMakefileを用いて開発しています。
+
+Makefileを読めば、やっていることは理解できると思いますが、メモ程度に書いておきます。
+
+`make docker/start`　Dockerコンテナを起動します
+
+`make docker/stop` Dockerコンテナを停止します
+
+`make docker/clean`　Dockerコンテナを削除します
+
+`make web/bash` Nginxコンテナにbashで入ることが出来ます。
+
+`make db/bash` MySQLコンテナにbashで入ることが出来ます。データベースの中身を知りたい際にご利用ください。
+
+`make php/bash` PHPコンテナにbashで入ることが出来ます。bin/cakeコマンドを叩く際にご利用ください。 
+
+`make migrate/init` マイグレーションするために初期化をします。
+
+`make migrate/up` マイグレーションを行います。
+
+`make migrate/down` マイグレーションを取り下げます。
+
+`make migrate/status` マイグレーションの状態を確認することができます。
+
+`make composer/install` composerでパッケージのインストールをします。
+
+## Author(著者)
 
 [YoshikawaTaiki](https://github.com/YoshikawaTaiki)
+
