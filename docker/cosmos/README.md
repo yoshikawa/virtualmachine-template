@@ -15,7 +15,12 @@ ex. `sudo apt install mysql-client`
 
 ## Usage
 
-1. `docker build --rm -f "Dockerfile" -t cosmos:latest .`
+1. `make docker/build`
+2. `make docker/start`
+3. `$ gaiad version`
+4. `$ gaiacli version`
+
+If you can verify this version, this usage is over.
 
 ## Contribution
 
