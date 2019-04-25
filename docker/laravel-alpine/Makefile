@@ -29,4 +29,4 @@ db/ash: ## db container ash
 	docker-compose exec db ash
 
 help: ## show help
-	@grep -E '^([a-zA-Z/_-]+[ :])+.*## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*## "}; {n=split($$1, commands, " "); for(i in commands) {printf "\033[36m%-16s", commands[i]; if(i == 1) {printf("  ")}; if (i < n) { printf("\n  \033[0m= ")}} printf "\033[0m %s\n", $$2}'
+	@grep -E '^([a-zA-Z/_-]+[ :])+.*## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*## "}; {n=split($$1, commands, " "); for(i in commands) { if (i == 1) {format="\033[36m%-24s"} else if (i > 1) {format="  \033[0m= \033[36m%-20s"}; if ((n > 1) && (i != n)) { format=format"\n" }; printf format, commands[i]} printf "\033[0m%s\n", $$2}'
