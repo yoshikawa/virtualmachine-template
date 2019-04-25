@@ -1,0 +1,46 @@
+version: "3"
+
+services:
+  web:
+    container_name: laravel-centos-web
+    build: ./.docker/nginx
+    command: /sbin/init
+    privileged: true
+    restart: always
+    volumes:
+      - ./.docker/nginx/conf/default.conf:/etc/nginx/conf.d/default.conf:z
+      - ./app:/app
+    ports:
+      - 8080:8080
+    depends_on:
+      - php
+      - db
+  php:
+    container_name: laravel-centos-php
+    build: ./.docker/php
+    command: /sbin/init
+    privileged: true
+    restart: always
+    volumes:
+      - ./.docker/php/conf/php.ini:/etc/php.ini:z
+      - ./.docker/php/conf/php-fpm.d/www.conf:/etc/php-fpm.d/www.conf:z
+      - ./app:/app
+      - ./phpinfo/phpinfo.php:/var/www/html/phpinfo.php:z
+  db:
+    container_name: laravel-centos-db
+    image: mysql:latest
+    restart: always
+    volumes:
+      - ./.docker/mysql/conf/my.cnf:/etc/mysql/conf.d/my.cnf:z
+      - ./.docker/mysql/wait_sh.sh:/root/wait_sh.sh:z
+    environment:
+      MYSQL_DATABASE: laravel_db
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - 33306:3306
+
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: 192.168.70.0/24
