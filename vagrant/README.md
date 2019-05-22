@@ -3,7 +3,7 @@ VirtualMachine-Template
 Using Vagrant or Docker to run various applications.
 
 ## Description
-YoshikawaTaiki/virtualmachine-template -　Using Vagrant to run various applications.
+yoshikawa/virtualmachine-template -　Using Vagrant to run various applications.
 
 ## Requirements
 - [Vagrant](https://www.vagrantup.com/)
@@ -16,14 +16,14 @@ if you use Macintosh
 
 ## Install
 - Make sure you've installed Requirements.
-- Open terminal, `cd` to working directory and clone the project `git clone git://github.com/YoshikawaTaiki/vagrant-template.git`
+- Open terminal, `cd` to working directory and clone the project `git clone git://github.com/yoshikawa/vagrant-template.git`
 - Place application source code into webroot folder
 - To start the virtual machine again execute `vagrant up`
 - To turn off virtual machine execute `vagrant halt`
 - To clean up execute `vagrant destroy`
 
 ## Contribution
-1. Fork it ( https://github.com/Yoshikawataiki/vagrant-template/fork)
+1. Fork it ( https://github.com/yoshikawa/vagrant-template/fork)
 2. Create your feature branch
 3. Commit your changes
 4. Push to the branch
@@ -31,9 +31,9 @@ if you use Macintosh
 
 ## Licence
 
-[MIT](https://github.com/YoshikawaTaiki/vagrant-template/blob/master/LICENSE)
+[MIT](https://github.com/yoshikawa/vagrant-template/blob/master/LICENSE)
 
 
 ## Author
 
-[YoshikawaTaiki](https://github.com/YoshikawaTaiki)
+[YoshikawaTaiki](https://github.com/yoshikawa)
