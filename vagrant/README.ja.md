@@ -17,7 +17,7 @@ MacOSならばHomebrewを用いて必要なツール、プラグインをダウ�
 ## インストール
 - 初期導入をしてください。
 - ターミナルを開いて, `cd` ワーキングディレクトリに移動して、このプロジェクトをgit cloneしてください.
-  - `git clone git://github.com/yoshikawa/vagrant-template.git`
+  - `git clone git://github.com/yoshikawa/virtualmachine-template.git`
 - カレントディレクトリを`ror5`や`cakephp3`に移動してください。
 - 仮想マシンを立ち上げるには、 `vagrant up` を実行。
 - 仮想マシンをシャットダウンするには `vagrant halt` を実行。
@@ -36,7 +36,7 @@ RoR5の開発環境が欲しい場合、ror5ディレクトリを用います。
 CakePHPとは違い、仮想マシンを立ち上げる際には、`vagrant up`のみで大丈夫です。
 
 ## コントリビューション（貢献）
-1. Forkします。 (https://github.com/yoshikawa/vagrant-template/fork)
+1. Forkします。 (https://github.com/yoshikawa/virtualmachine-template/fork)
 2. feature branchを作ります。
 3. あなたの変更をコミットします。
 4. そのブランチにプッシュします。
@@ -44,7 +44,7 @@ CakePHPとは違い、仮想マシンを立ち上げる際には、`vagrant up`�
 
 ## ライセンス
 
-[MIT](https://github.com/yoshikawa/vagrant-template/blob/master/LICENSE)
+[MIT](https://github.com/yoshikawa/virtualmachine-template/blob/master/LICENSE)
 
 
 ## 著者
