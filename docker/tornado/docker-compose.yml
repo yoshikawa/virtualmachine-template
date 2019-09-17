@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  tornado-db:
+    image: mysql:latest
+    container_name: tornado-db
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - 3307:13307
+    volumes:
+      - ./build/db/access.cnf:/home/access.cnf
+      - ./build/db/wait.sh:/home/wait.sh
+    environment:
+        MYSQL_DATABASE: root
+        MYSQL_ROOT_PASSWORD: password
+
+  tornado:
+    build: ./
+    container_name: tornado
+    tty: true
+    ports:
+      - 8888:8888
